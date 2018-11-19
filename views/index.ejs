@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </head>
+  <body class="container">
+  	<%= %>
+  	<ul class="nav nav-pills">
+		<% if(logined){ %>
+  			<li role="presentation" ><a href="javascript:;" data-toggle="modal" data-target="#myModal">添加</a></li>
+  			<li role="presentation" ><a href="/logout">退出</a></li>
+		<% }else{ %>
+  			<li role="presentation" ><a href="javascript:;" data-toggle="modal" data-target="#loginDialog">登录</a></li>
+		<%}%>
+  	</ul>
+
+  	<form action="/login" method="post" id="loginDialogForm" ">
+  		<div class="modal fade" id="loginDialog" tabindex="-1" role="dialog">
+  			<div class="modal-dialog">
+  				<div class="modal-content">
+  					<div class="modal-header">
+  						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  							<span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">登录</h4>
+  					</div>
+  					<div class="modal-body">
+  						<div class="modal-body">
+  							<label for="loginname">登录名称</label>
+  							<input type="text" name="loginname" class="form-control" id="loginname" placeholder="loginname">
+						</div>
+						<div class="modal-body">
+  							<label for="password">登录密码</label>
+  							<input type="text" name="password" class="form-control" id="password" placeholder="password">
+						</div>
+						<div class="modal-body">
+  							<label for="loginname"><img src="/refresh" ></label>
+  							<input type="text" name="vnum" class="form-control" id="vnum" placeholder="图片验证码">
+						</div>
+  					</div>
+  					<div class="modal-footer">
+  						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<input type="submit" class="btn btn-primary" value="登录">
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</form>
+
+  	<form action="/add" method="post">
+  		<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+  			<div class="modal-dialog">
+  				<div class="modal-content">
+  					<div class="modal-header">
+  						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  							<span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Modal title</h4>
+  					</div>
+  					<div class="modal-body">
+  						<label for="exampleInputEmail">标题</label>
+  						<input type="text" name="title" class="form-control" id="exampleInputEmail" placeholder="title">
+  					</div>
+  					<div class="modal-footer">
+  						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<input type="submit" class="btn btn-primary" value="更改">
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</form>
+
+	<form action="/update" method="post">
+  		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+  			<div class="modal-dialog">
+  				<div class="modal-content">
+  					<div class="modal-header">
+  						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  							<span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">更改标题</h4>
+  					</div>
+  					<div class="modal-body">
+  						<label for="exampleInputEmail">标题</label>
+  						<input type="hidden" id="updateIndex" name="index">
+  						<input type="text" name="title" id="updateTitle" class="form-control" id="exampleInputEmail" placeholder="title">
+  					</div>
+  					<div class="modal-footer">
+  						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<input type="submit" class="btn btn-primary" value="更改">
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</form>
+  	
+	<!-- <div>
+		<form action="/add" method="post">
+			<label for=""><input type="text" name="title">标题</label>
+			<input type="submit" value="添加">
+		</form>
+	</div> -->
+
+	
+	<ul class="list-group">
+		<% list.forEach(function(article,index){ %>
+			<li class="list-group-item"><%= article.title %>
+				<% if(logined){ %>
+					<a href="del?index=<%=index%>">删除</a>
+					<a href="#" onclick="edit(<%=index%>)" data-toggle="modal" data-target="#myModal2">更改</a>
+				<%}%>
+			</li>
+		<% }) %>
+	</ul>
+
+
+
+
+
+	</ul>
+
+	<script>
+
+		// var test = <%= logined %>;
+		// console.log(test);
+		
+		function edit(index){
+			$.get('/get/'+index,function(result){
+				console.log(result);
+				$('#updateTitle').val(result.title);
+				$('#updateIndex').val(index);
+				// console.log(result);
+			})
+		}
+
+		$('#loginDialogForm')[0].onsubmit = function(event){
+			event.preventDefault();
+			$.post('/login',{loginname:$('#loginname').val(),password:$('#password').val()},function(result){
+				if(result==='success'){
+					window.location.reload();
+				}else{
+					alert('login error');
+				}
+			})
+		}
+
+
+	</script>
+
+  </body>
+</html>
