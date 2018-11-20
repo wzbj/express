@@ -8,7 +8,7 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
   <body class="container">
-  	<%= %>
+  	<%= logined %>
   	<ul class="nav nav-pills">
 		<% if(logined){ %>
   			<li role="presentation" ><a href="javascript:;" data-toggle="modal" data-target="#myModal">添加</a></li>
@@ -136,7 +136,7 @@
 
 		$('#loginDialogForm')[0].onsubmit = function(event){
 			event.preventDefault();
-			$.post('/login',{loginname:$('#loginname').val(),password:$('#password').val()},function(result){
+			$.post('/login',{loginname:$('#loginname').val(),password:$('#password').val(),vnum:$('#vnum').val()},function(result){
 				if(result==='success'){
 					window.location.reload();
 				}else{

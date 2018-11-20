@@ -91,7 +91,9 @@ app.post('/update/',function(req,res){
 app.post('/login',function(req,res){
 	let loginname = req.body.loginname;
 	let password = req.body.password;
-	if(loginname === 'leo' && password ==='123'){
+	var vnum = req.body.vnum;
+
+	if(loginname === 'leo' && password ==='123' && vnum === req.session.validat_num){
 		req.session.logined = true;
 		res.send("success");
 	}else{
@@ -100,8 +102,12 @@ app.post('/login',function(req,res){
 })
 
 app.get('/logout',function(req,res){
-	res.session.logined = false;
-	res.send();
+
+
+	req.session.logined = false;
+	// res.send();
+	res.redirect('/');//返回首页
+
 })
 
 
