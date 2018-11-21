@@ -5,9 +5,31 @@
 	<title>Document</title>
 </head>
 <body>
-	<form method="get">
+	<!-- <form method="get" action="/?__method=search"> -->
+	<!-- <form method="post" action="/">
 		<input type="hidden" name="__method" value="search" />
-		<input type="submit" value="提交" />
+		<input type="submit" / >
+	</form> -->
+
+	<form method="get" action="/?__method=DELETE">
+		<input type="hidden" name="__method" value="delete" />
+		<input type="submit">
 	</form>
+
+	<button id="test">test</button>
 </body>
+<script>
+	
+
+	test.onclick = function(){
+		console.log(1111111);
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function(result){
+			console.log(this.responseText);
+		}
+		xhr.open('post','/?__method=DELETE',true);
+		xhr.setRequestHeader('X-HTTP-Method-Override','delete');
+		xhr.send();
+	}
+</script>
 </html>

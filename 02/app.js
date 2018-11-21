@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,29 +15,39 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(function(req,res,next){
-	console.log(req.query.__method,req.method);
+// app.use(function(req,res,next){
+// 	console.log(req.query.__method,req.method);
 	
-	try{
-		req.oldMethod = req.method;
-		req.method = req.query.__method;
-		next();
-	}catch(e){
-		console.log(e);
-	}
-});
+// 	try{
+// 		req.oldMethod = req.method;
+// 		req.method = req.query.__method;
+// 		next();
+// 	}catch(e){
+// 		console.log(e);
+// 	}
+// });
+
+app.use(methodOverride('__method',{methods:['POST','GET']}));//methods可以设置为空
 
 
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// app.use(methodOverride(function(req,res){
+// 	return req.body.__method;
+// }))
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.search('/',function(req,res){
 	res.send("my name is search");
+})
+app.delete('/',function(req,res){
+	res.send('ny name is delete method');
 })
 
 
