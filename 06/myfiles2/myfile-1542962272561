@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AIM客服管理系统（新）</title> 
+    <meta charset="utf-8">
+    <style>
+    body{background:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528291918994&di=7359db6f9f834cbbbc5f130e5f777288&imgtype=0&src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2Fqk%2Fback_origin_pic%2F00%2F02%2F28%2Fa267f1b4fc7f925e278939c12e66267a.jpg') no-repeat;background-size:100% 100%;background-color:white;}
+    #login_container{margin-left:90px;}
+    html{
+      height:100%;
+    }
+    #title{
+      font-size: 20px;
+      color: #713408c9;
+      font-weight: bold;
+      margin-left: 136px;
+    }
+    </style>
+  </head>
+  <body>
+    <div id='title'>AIM客服管理系统（新）</div>
+    <span id="login_container"></span>
+        <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+        <script> 
+         
+            
+        </script>
+    </script>
+  </body>
+</html>

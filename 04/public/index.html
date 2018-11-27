@@ -4,12 +4,16 @@
 	<title></title>
 </head>
 <body>
-
+<form action="/submit" method="post" enctype="application/json">
+	<input type="text" name="name">
+	<input type="password" name="password">
+	<input type="submit">
+</form>
 </body>
 <script type="text/javascript">
-	var xhr = new XMLHttpRequest();
-	xhr.open('get','/ajaxTest',true);
-	xhr.setRequestHeader('X-Requested-with','XMLHttpRequest');
-	xhr.send();
+	// var xhr = new XMLHttpRequest();
+	// xhr.open('get','/ajaxTest',true);
+	// xhr.setRequestHeader('X-Requested-with','XMLHttpRequest');
+	// xhr.send();
 </script>
 </html>
