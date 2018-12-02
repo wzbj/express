@@ -48,7 +48,7 @@ function printCourseInfo(courseData){
 	console.log(courseData);
 	courseData.forEach(function(item){
 		var chapterTitle = item.chapterTitle;
-		console.log(chapterTitle  + '\n');
+		console.log(chapterTitle+ '\n');
 
 		item.videos.forEach(function(video){
 			console.log('【'+video.id+'】'+video.title + '\n');
